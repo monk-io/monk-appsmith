@@ -1,3 +1,3 @@
-REPO monk-bird
+REPO monk-appsmith
 LOAD manifest.yaml
 RESOURCES files/supervisord.conf
