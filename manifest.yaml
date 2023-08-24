@@ -28,6 +28,8 @@ base:
 server:
   defines: runnable
   inherits: appsmith/base
+  metadata:
+    private: false
   containers:
     appsmith:
       paths:
