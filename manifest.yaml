@@ -1,0 +1,40 @@
+---
+namespace: appsmith
+
+base:
+  defines: runnable
+  metadata:
+    website: https://appsmith.com/
+    name: Appsmith
+    publisher: monk.io
+    icon: https://docs.appsmith.com/img/appsmith_logo_white.png
+    description: |
+      Appsmith simplifies internal tool development for businesses. This helps to streamline operations, automate processes, and quickly integrate multiple apps.
+    source: https://gitlab.nic.cz/labs/bird
+    version: 1.0
+    tags: development, uiux, visualization, prototyping, frontend, dashboards
+    private: true
+  containers:
+    appsmith:
+      image: index.docker.io/appsmith/appsmith-ce
+      image-tag: latest
+  files:
+    supervisord:
+      container: appsmith
+      mode: 0666
+      path: /etc/supervisor/supervisord.conf
+      contents: <<< files/supervisord.conf
+
+server:
+  defines: runnable
+  inherits: appsmith/base
+  containers:
+    appsmith:
+      paths:
+        - <- `${monk-volume-path}/appsmith:/appsmith-stacks`
+  services:
+    http:
+      container: appsmith
+      port: 80
+      protocol: tcp
+      host-port: 80
