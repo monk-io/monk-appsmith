@@ -17,7 +17,10 @@ base:
   containers:
     appsmith:
       image: index.docker.io/appsmith/appsmith-ce
-      image-tag: latest
+      image-tag: v1.9.32
+      environment:
+        - APPSMITH_INTERCOM_APP_ID=
+        - APPSMITH_DISABLE_INTERCOM=true
   files:
     supervisord:
       container: appsmith
